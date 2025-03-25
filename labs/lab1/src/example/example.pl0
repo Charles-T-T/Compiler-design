@@ -1,0 +1,16 @@
+CONST N = 100;
+VAR a, b;
+a: ARRAY [0..99] OF INT;
+
+FUNC func(x);
+    IF x = 1 OR x = 0 THEN
+        RETURN 1;
+    ELSE
+        RETURN func(x - 1) + func(x - 2);
+    FI;
+END;
+
+BEGIN
+    b := 10;
+    a[0] := func(b + 2);
+END.
