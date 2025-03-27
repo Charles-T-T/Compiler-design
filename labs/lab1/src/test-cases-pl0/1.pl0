@@ -1,15 +1,14 @@
-const size = 1000;  (* PL/0 不支持动态数组，这里假设最大 1000 *)
-var b[size], a, test, test2, valid;
-begin
-    b[222] := 8;  (* 010 八进制 -> 十进制 8 *)
-    test := 2147483647; (* PL/0 不支持大整数，只能保留可表达部分 *)
-    test2 := 703710; (* 0xABCDE -> 十进制 703710 *)
-    a := b[222];
+VAR a, b, test, 666bbb666, aaa111aaa;
 
-    valid := 1;  (* 用于模拟 `break` *)
-    while a > 0 do begin
-        a := a - 1;
-        if a = 5 then valid := 0;
-        if valid = 0 then a := 0; (* 实现 `break` 逻辑 *)
-    end;
-end.
+BEGIN
+  b := 010;
+  test := 21474836472147483647
+  test := 0xabcde
+  a := b
+  WHILE a > 0 DO
+  BEGIN
+    a := a - 1;
+    IF a = 5 THEN        
+      a := 0;
+  END;
+END.
