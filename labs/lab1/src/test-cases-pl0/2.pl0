@@ -1,0 +1,22 @@
+VAR n, s, i, newline;
+
+BEGIN
+  READ n;
+  IF n > 10 THEN
+    WRITE 1;
+  
+  s := 0;
+  i := 0;
+
+  WHILE i < n DO
+  BEGIN
+    READ s;
+    s := s + s;
+    i := i + 1;
+  END;
+
+  WRITE s;
+  
+  newline := 10;
+  WRITE newline;
+END.

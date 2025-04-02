@@ -1,0 +1,14 @@
+VAR n, result;
+
+BEGIN
+  n := 4;
+  result := 1;
+
+  WHILE n > 0 DO
+  BEGIN
+    result := result * n;
+    n := n - 1;
+  END;
+
+  WRITE result;
+END.

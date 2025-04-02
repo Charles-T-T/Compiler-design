@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+extern int yylineno;   
+int yycolno = 1;
+
 const char* Ks[] = {
   "CONST", "VAR", "PROCEDURE", "IF", "THEN", "BEGIN", "END", "WHILE", "DO", "CALL", "ODD", "RAED", "WRITE", NULL
 };
@@ -30,40 +33,55 @@ operator [+*/=<>-]
 
 %%
 
-[ \t\n]   ; 
+\n {
+  yycolno = 1;
+}
+
+[ \t]+ {
+  yycolno += yyleng;
+}
 
 {token} {
   if (isK(yytext)) {
-    printf("%s: K\n", yytext);
+    printf("%s: K, (%d, %d)\n", yytext, yylineno, yycolno);
   } else {
-    printf("%s: I\n", yytext);
+    printf("%s: I (%d, %d)\n", yytext, yylineno, yycolno);
   }
+  yycolno += yyleng;
 }
 
 {digit}+ {
-  printf("%s: C\n", yytext);
+  printf("%s: C, (%d, %d)\n", yytext, yylineno, yycolno);
+  yycolno += yyleng;
 }
 
 ":="|{delimiter} {
-  printf("%s: D\n", yytext);
+  printf("%s: D, (%d, %d) \n", yytext, yylineno, yycolno);
+  yycolno += yyleng;
 }
 
 "<>"|"<="|">="|{operator} {
-  printf("%s: O\n", yytext);
+  printf("%s: O, (%d, %d)\n", yytext, yylineno, yycolno);
+  yycolno += yyleng;
 }
 
 {digit}+{token} {
-  printf("%s: T\n", yytext);
+  printf("%s: T, (%d, %d)\n", yytext, yylineno, yycolno);
+  yycolno += yyleng;
 }
 
 . {
-  printf("%s: T\n", yytext);
+  printf("%s: T, (%d, %d)\n", yytext, yylineno, yycolno);
+  yycolno += yyleng;
 }
 
 %%
 
 int main(int argc, char *argv[]) {
-    yyin = stdin;
-    yylex();
-    return 0;
+  yylineno = 1;
+  yycolno = 1;
+
+  yyin = stdin;
+  yylex();
+  return 0;
 }

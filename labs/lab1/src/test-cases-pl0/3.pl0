@@ -1,0 +1,23 @@
+VAR p, c, d, e;
+
+BEGIN
+  p := 2;
+  c := p + p;
+
+  WHILE c < 75 DO
+  BEGIN
+    d := 42;
+    IF c < 100 THEN
+    BEGIN
+      c := c + d;
+      IF c > 99 THEN
+      BEGIN
+        e := d * 2;
+        IF 1 = 1 THEN
+          c := e * 2;
+      END;
+    END;
+  END;
+
+  WRITE c;
+END.
